@@ -32,6 +32,9 @@ except configparser.Error as e:
     logging.error(f'Error loading secrets file {secrets_file}: {e}')
     webhook_url = ''
 
+if webhook_url == '':
+    webhook_url = None
+
 if not webhook_url:
     logging.warning(f'No webhook_url found in secrets file {secrets_file}. Please add a webhook_url to receive updates.')
 
@@ -57,10 +60,10 @@ logging.info(f'Successfully loaded secrets and config files.')
 
 def postWebhook(loop_count, version_number):
     # Post update to Discord webhook
-    if webhook is not None:
+    if webhook_url is not None:
         webhook = DiscordWebhook(url=webhook_url)
         embed = DiscordEmbed(title='New Roblox Update!', color=242424)
-        embed.add_embed_field(name='Client Update Checks', value=str(loop_count))
+        embed.add_embed_field(name='Loop Count', value=loop_count)
         embed.add_embed_field(name='New Version', value=version_number)
         embed.add_embed_field(name='Time Found', value=str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
