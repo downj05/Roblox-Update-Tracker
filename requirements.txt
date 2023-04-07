@@ -1,0 +1,2 @@
+bs4==0.0.1
+discord-webhook=0.13.0 
