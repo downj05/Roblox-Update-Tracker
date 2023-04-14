@@ -172,7 +172,7 @@ while True:
             # Update the last release number to the new release number
             last_release_number = release_number
         else:
-            logging.info("Now new release found.")
+            logging.info("No new release found.")
 
     # Increment the run count
     run_count += 1
